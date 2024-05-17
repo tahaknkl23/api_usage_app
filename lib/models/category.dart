@@ -8,8 +8,8 @@ class Category {
 
 //burdaki amaç jsondan gelen veriyi map yapısına çevirmek
   Category.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    categoryName = json['name'];
+    id = int.parse(json['id']); //jsondan gelen id değerini int'e çeviriyoruz
+    categoryName = json['categoryName'];
     seoUrl = json['seoUrl'];
   }
 
