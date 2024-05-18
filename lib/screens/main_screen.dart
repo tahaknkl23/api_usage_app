@@ -22,6 +22,7 @@ class _MainScreenState extends State<MainScreen> {
   @override
   void initState() {
     getCategoriesFromApi();
+    getProducts();
     super.initState();
   }
 
@@ -105,7 +106,7 @@ class _MainScreenState extends State<MainScreen> {
       debugPrint('Error: category.id is null');
       return;
     }
-
+//bu kısımda ürünleri getiriyoruz
     ProductApi.getProductsByCategoryId(category.id!).then(
       (response) {
         setState(
@@ -113,6 +114,25 @@ class _MainScreenState extends State<MainScreen> {
             Iterable list = json.decode(response.body); //burda jsondan gelen veriyi listeye atıyoruz
             products = list.map((product) => Product.fromJson(product)).toList(); //
             debugPrint('products length: ${products.length}'); //burda ürünlerin uzunluğunu yazdırıyoruz
+
+            debugPrint('${response.body}');
+          },
+        );
+      },
+    );
+  }
+
+  void getProducts() {
+//bu kısımda ürünleri getiriyoruz
+    ProductApi.getProducts().then(
+      (response) {
+        setState(
+          () {
+            Iterable list = json.decode(response.body); //burda jsondan gelen veriyi listeye atıyoruz
+            products = list.map((product) => Product.fromJson(product)).toList(); //
+            debugPrint('products length: ${products.length}'); //burda ürünlerin uzunluğunu yazdırıyoruz
+
+            debugPrint('${response.body}');
           },
         );
       },
